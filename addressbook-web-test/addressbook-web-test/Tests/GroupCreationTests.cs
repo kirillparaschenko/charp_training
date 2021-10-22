@@ -13,17 +13,17 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupPage();
-            InitGroupCreation();
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GoToGroupPage();
+            app.Groups.InitGroupCreation();
             GroupData group = new GroupData("Test");
             group.Header = "Test 1!";
             group.Footer = "Test 2%";
-            FillGroupForm(group); 
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            LogOut();
+            app.Groups.FillGroupForm(group);
+            app.Groups.SubmitGroupCreation();
+            app.Groups.ReturnToGroupsPage();
+            app.Auth.LogOut();
         }
     }
 }
