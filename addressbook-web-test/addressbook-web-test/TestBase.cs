@@ -10,12 +10,11 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class TestBaseContact
+    public class TestBase
     {
         protected IWebDriver driver;
         private StringBuilder verificationErrors;
         protected string baseURL;
-        private bool acceptNextAlert = true;
 
         [SetUp]
         public void SetupTest()
@@ -38,7 +37,7 @@ namespace WebAddressbookTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-        protected void Login(AccountData account)
+                protected void Login(AccountData account)
         {
             driver.FindElement(By.Name("user")).Click();
             driver.FindElement(By.Name("user")).Clear();
@@ -51,6 +50,38 @@ namespace WebAddressbookTests
         protected void OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+        }
+        protected void GoToGroupPage()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+        protected void InitGroupCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+        protected void FillGroupForm(GroupData group)
+        {
+            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
+            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
+            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+        }
+        protected void SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+        protected void ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
+        protected void ReturnToHomepage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
         }
         protected void AddContact()
         {
@@ -135,10 +166,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
-        }
-        protected void ReturnToHomepage()
-        {
-            driver.FindElement(By.LinkText("home page")).Click();
         }
         protected void LogOut()
         {
