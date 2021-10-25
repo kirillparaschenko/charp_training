@@ -7,11 +7,11 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class CreateContactTests : TestBase
+    public class ContactCreateTests : TestBase
     {
 
         [Test]
-        public void CreateContactTest()
+        public void ContactCreateTest()
         {
             ContactData contact = new ContactData("Test", "Auto", "Contact");
             app.Contact.Create(contact);

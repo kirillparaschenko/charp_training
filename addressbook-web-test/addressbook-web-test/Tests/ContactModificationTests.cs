@@ -7,15 +7,15 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    [TestFixture]
-    public class RemoveGroupTests : TestBase
+    public class ContactModificationTests : TestBase
     {
         [Test]
-        public void GroupRemoveTest()
+        public void ContactModificationTest()
         {
-            app.Groups.Remove(1);
+            ContactData newData = new ContactData("TestUpd", "AutoUPD", "ContactUPD");
+            app.Contact.Modify(1, newData);
             app.Auth.LogOut();
         }
-
     }
 }
+
