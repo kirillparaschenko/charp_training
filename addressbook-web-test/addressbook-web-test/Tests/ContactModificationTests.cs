@@ -13,7 +13,13 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newData = new ContactData("TestUpd", "AutoUPD", "ContactUPD");
-            app.Contact.Modify(1, newData);
+            newData.Bday = "2";
+            newData.Bmounth = "June";
+            newData.Byear = "2001";
+            newData.Aday = "3";
+            newData.Amounth = "April";
+            newData.Ayear = "2022";
+            app.Contact.Modify(5, newData);
             app.Auth.LogOut();
         }
     }
