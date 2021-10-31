@@ -8,13 +8,13 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemoveTests : TestBase
+    public class GroupRemoveTests : AuthTestBase
     {
         [Test]
         public void GroupRemoveTest()
         {
             app.Groups.Remove(1);
-            app.Auth.LogOut();
+            //app.Auth.LogOut();
         }
 
     }
