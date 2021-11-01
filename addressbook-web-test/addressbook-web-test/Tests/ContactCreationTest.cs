@@ -14,9 +14,6 @@ namespace WebAddressbookTests
         public void ContactCreateTest()
         {
             ContactData contact = new ContactData("Test", "Auto", "Contact");
-            //contact.Firstname = null;
-            //contact.Middlename = null;
-            //contact.Lastname = null;
             contact.Nickname = null;
             contact.Title = null;
             contact.Companyname = null;
@@ -39,7 +36,6 @@ namespace WebAddressbookTests
             contact.Phone2 = null;
             contact.Notes = null;
             app.Contact.Create(contact);
-            //app.Auth.LogOut();
         }
     }
 }

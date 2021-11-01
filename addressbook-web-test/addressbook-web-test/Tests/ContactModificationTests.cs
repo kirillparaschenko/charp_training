@@ -13,9 +13,6 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newData = new ContactData("TestUpd", null, "ContactUPD");
-            //newData.Firstname = null;
-            //newData.Middlename = null;
-            //newData.Lastname = null;
             newData.Nickname = null;
             newData.Title = null;
             newData.Companyname = null;
@@ -39,7 +36,6 @@ namespace WebAddressbookTests
             newData.Notes = null;
 
             app.Contact.Modify(1, newData);
-            //app.Auth.LogOut();
         }
     }
 }

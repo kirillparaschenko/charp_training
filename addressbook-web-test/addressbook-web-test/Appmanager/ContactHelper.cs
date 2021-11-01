@@ -29,15 +29,37 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int v, ContactData newData)
         {
             manager.Navigator.GoToHome();
+            if (IsContactCreated())
+            {
+                InitContactModigication(v);
+                FillContactForm(newData);
+                SubmitContactModification();
+                ReturnToHomepage();
+                return this;
+            }
+            InitContactCreation();
+            AddContact();
+            ReturnToHomepage();
             InitContactModigication(v);
             FillContactForm(newData);
             SubmitContactModification();
             ReturnToHomepage();
             return this;
         }
+
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHome();
+            if (IsContactCreated())
+            {
+                SelectCheckbox(v);
+                DeleteContact();
+                SubmitContactRemoving();
+                return this;
+            }
+            InitContactCreation();
+            AddContact();
+            ReturnToHomepage();
             SelectCheckbox(v);
             DeleteContact();
             SubmitContactRemoving();
@@ -124,6 +146,10 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//tr[" + (index + 1) + "]/td[8]/a/img")).Click();
             return this;
+        }
+        public bool IsContactCreated()
+        {
+            return IsElementPresent(By.Name("selected[]"));
         }
     }
 }
