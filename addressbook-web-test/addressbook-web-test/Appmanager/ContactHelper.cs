@@ -29,17 +29,6 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int v, ContactData newData)
         {
             manager.Navigator.GoToHome();
-            if (IsContactCreated())
-            {
-                InitContactModigication(v);
-                FillContactForm(newData);
-                SubmitContactModification();
-                ReturnToHomepage();
-                return this;
-            }
-            InitContactCreation();
-            AddContact();
-            ReturnToHomepage();
             InitContactModigication(v);
             FillContactForm(newData);
             SubmitContactModification();
@@ -50,16 +39,6 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHome();
-            if (IsContactCreated())
-            {
-                SelectCheckbox(v);
-                DeleteContact();
-                SubmitContactRemoving();
-                return this;
-            }
-            InitContactCreation();
-            AddContact();
-            ReturnToHomepage();
             SelectCheckbox(v);
             DeleteContact();
             SubmitContactRemoving();
@@ -100,11 +79,11 @@ namespace WebAddressbookTests
             Type(By.Name("email2"), contact.Email2);
             Type(By.Name("email3"), contact.Email3);
             Type(By.Name("homepage"), contact.Homepage);
-            Dropdown(By.Name("bday"), contact.Bday);
-            Dropdown(By.Name("bmonth"), contact.Bmounth);
+            //Dropdown(By.Name("bday"), contact.Bday);
+            //Dropdown(By.Name("bmonth"), contact.Bmounth);
             Type(By.Name("byear"), contact.Byear);
-            Dropdown(By.Name("aday"), contact.Aday);
-            Dropdown(By.Name("amonth"), contact.Amounth);
+            //Dropdown(By.Name("aday"), contact.Aday);
+            //Dropdown(By.Name("amonth"), contact.Amounth);
             Type(By.Name("ayear"), contact.Ayear);
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);
@@ -149,6 +128,7 @@ namespace WebAddressbookTests
         }
         public bool IsContactCreated()
         {
+            manager.Navigator.GoToHome();
             return IsElementPresent(By.Name("selected[]"));
         }
     }

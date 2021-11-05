@@ -25,16 +25,22 @@ namespace WebAddressbookTests
             newData.Email2 = null;
             newData.Email3 = null;
             newData.Homepage = null;
-            newData.Bday = null;
-            newData.Bmounth = null;
+            //newData.Bday = null;
+            //newData.Bmounth = null;
             newData.Byear = null;
-            newData.Aday = null;
-            newData.Amounth = null;
+            //newData.Aday = null;
+            //newData.Amounth = null;
             newData.Ayear = null;
             newData.Address2 = null;
             newData.Phone2 = null;
             newData.Notes = null;
 
+            if (app.Contact.IsContactCreated())
+            {
+                app.Contact.Modify(1, newData);
+                return;
+            }
+            app.Contact.Create(new ContactData("New", "New", "New"));
             app.Contact.Modify(1, newData);
         }
     }

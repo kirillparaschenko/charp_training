@@ -26,11 +26,11 @@ namespace WebAddressbookTests
             contact.Email2 = null;
             contact.Email3 = null;
             contact.Homepage = null;
-            contact.Bday = null;
-            contact.Bmounth = null;
+            //contact.Bday = null;
+            //contact.Bmounth = null;
             contact.Byear = null;
-            contact.Aday = null;
-            contact.Amounth = null;
+            //contact.Aday = null;
+            //contact.Amounth = null;
             contact.Ayear = null;
             contact.Address2 = null;
             contact.Phone2 = null;
