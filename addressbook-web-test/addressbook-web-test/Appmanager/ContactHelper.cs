@@ -47,7 +47,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectCheckbox(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" +(index+1)+ "]/td")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" +(index+2)+ "]/td")).Click();
             return this;
         }
 
@@ -123,13 +123,25 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModigication(int index)
         {
-            driver.FindElement(By.XPath("//tr[" + (index + 1) + "]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath("//tr[" + (index + 2) + "]/td[8]/a/img")).Click();
             return this;
         }
         public bool IsContactCreated()
         {
             manager.Navigator.GoToHome();
             return IsElementPresent(By.Name("selected[]"));
+        }
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHome();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                var tds = element.FindElements(By.CssSelector("td"));
+                contacts.Add(new ContactData(tds[2].Text, tds[1].Text));
+            }
+            return contacts;
         }
     }
 }

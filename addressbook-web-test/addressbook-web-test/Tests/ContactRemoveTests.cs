@@ -12,13 +12,20 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemoveTest()
         {
-            if (app.Contact.IsContactCreated())
+            if (app.Contact.IsContactCreated() is false)
             {
-                app.Contact.Remove(1);
-                return;
+                app.Contact.Create(new ContactData("New", "New"));
             }
-            app.Contact.Create(new ContactData("New", "New", "New"));
-            app.Contact.Remove(1);
+
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+
+            app.Contact.Remove(0);
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

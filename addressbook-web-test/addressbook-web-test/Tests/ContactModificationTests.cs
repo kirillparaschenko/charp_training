@@ -12,7 +12,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newData = new ContactData("TestUpd", null, "ContactUPD");
+            ContactData newData = new ContactData("TestUpd", "ContactUPD");
             newData.Nickname = null;
             newData.Title = null;
             newData.Companyname = null;
@@ -35,13 +35,20 @@ namespace WebAddressbookTests
             newData.Phone2 = null;
             newData.Notes = null;
 
-            if (app.Contact.IsContactCreated())
+            if (app.Contact.IsContactCreated() is false)
             {
-                app.Contact.Modify(1, newData);
-                return;
+                app.Contact.Create(new ContactData("New", "New"));
             }
-            app.Contact.Create(new ContactData("New", "New", "New"));
+
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+
             app.Contact.Modify(1, newData);
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts[1] = newData;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
