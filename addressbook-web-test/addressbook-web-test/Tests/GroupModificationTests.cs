@@ -17,13 +17,14 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            if (app.Groups.IsGroupCreated() is false)
+            if (! app.Groups.IsGroupCreated())
             {
                 app.Groups.Create(new GroupData("New test group"));
             }
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-            
+            GroupData oldData = oldGroups[0];
+
             app.Groups.Modify(0, newData);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
@@ -32,6 +33,15 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+
+                }
+            }
         }
     }
 }

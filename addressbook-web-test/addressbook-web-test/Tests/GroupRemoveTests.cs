@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemoveTest()
         {
-            if (app.Groups.IsGroupCreated() is false)
+            if (! app.Groups.IsGroupCreated())
             {
                 app.Groups.Create(new GroupData("New test group"));
             }
@@ -23,8 +23,14 @@ namespace WebAddressbookTests
             app.Groups.Remove(0);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
     }
 }

@@ -67,7 +67,11 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return this.ToString().CompareTo(other.ToString());
+            if (this.Lastname != other.Lastname)
+            {
+                return Lastname.CompareTo(other.Lastname);
+            }
+            return Firstname.CompareTo(other.Firstname);
         }
 
         public string Firstname

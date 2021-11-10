@@ -145,6 +145,7 @@ namespace WebAddressbookTests
                 manager.Navigator.GoToHome();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
                 foreach (IWebElement element in elements)
+
                 {
                     var tds = element.FindElements(By.CssSelector("td"));
                     contactCache.Add(new ContactData(tds[2].Text, tds[1].Text));

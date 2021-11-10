@@ -35,7 +35,7 @@ namespace WebAddressbookTests
             newData.Phone2 = null;
             newData.Notes = null;
 
-            if (app.Contact.IsContactCreated() is false)
+            if (! app.Contact.IsContactCreated())
             {
                 app.Contact.Create(new ContactData("New", "New"));
             }
