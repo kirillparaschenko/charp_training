@@ -148,7 +148,9 @@ namespace WebAddressbookTests
 
                 {
                     var tds = element.FindElements(By.CssSelector("td"));
-                    contactCache.Add(new ContactData(tds[2].Text, tds[1].Text));
+                    contactCache.Add(new ContactData(tds[2].Text, tds[1].Text) {
+                        Id = element.FindElement(By.Name("selected[]")).GetAttribute("value")
+                    });
                 }
             }
             return new List<ContactData>(contactCache);

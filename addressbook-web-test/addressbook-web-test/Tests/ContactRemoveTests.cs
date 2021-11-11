@@ -22,10 +22,16 @@ namespace WebAddressbookTests
             app.Contact.Remove(0);
 
             List<ContactData> newContacts = app.Contact.GetContactList();
+            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
         }
     }
 }
