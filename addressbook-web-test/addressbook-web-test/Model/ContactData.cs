@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+        private string allEmails;
 
         public ContactData(string firstname, string lastname)
         {
@@ -60,10 +63,56 @@ namespace WebAddressbookTests
         public string Homephone { get; set; }
         public string Mobilephone { get; set; }
         public string Workphone { get; set; }
+        public string AllPhones
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(Homephone) + CleanUp(Mobilephone) + CleanUp(Workphone)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ","").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+        }
+
         public string Fax { get; set; }
         public string Email1 { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return ((Email1 + "\r\n") + (Email2 + "\r\n") + (Email3 + "\r\n")).Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
         public string Homepage { get; set; }
         public string Bday { get; set; }
         public string Bmounth { get; set; }
