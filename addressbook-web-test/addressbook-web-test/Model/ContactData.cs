@@ -105,13 +105,21 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return ((Email1 + "\r\n") + (Email2 + "\r\n") + (Email3 + "\r\n")).Trim();
+                    return (NewEmail(Email1) + NewEmail(Email2) + NewEmail(Email3)).Trim();
                 }
             }
             set
             {
                 allEmails = value;
             }
+        }
+        private string NewEmail(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return email + "\r\n";
         }
         public string Homepage { get; set; }
         public string Bday { get; set; }
