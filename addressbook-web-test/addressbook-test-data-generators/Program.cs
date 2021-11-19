@@ -50,7 +50,9 @@ namespace addressbook_test_data_generators
                 List<ContactData> contacts = new List<ContactData>();
                 for (int i = 0; i < count; i++)
                 {
-                    contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10)));
+                    contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10))
+                    {
+                    });
                 }
                 if (format == "json")
                 {
