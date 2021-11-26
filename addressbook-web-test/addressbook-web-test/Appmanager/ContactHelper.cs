@@ -35,6 +35,15 @@ namespace WebAddressbookTests
             ReturnToHomepage();
             return this;
         }
+        public ContactHelper Modify(ContactData contact, ContactData newData)
+        {
+            manager.Navigator.GoToHome();
+            InitContactModigication(contact.Id);
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturnToHomepage();
+            return this;
+        }
 
         public ContactHelper Remove(int v)
         {
@@ -44,12 +53,28 @@ namespace WebAddressbookTests
             SubmitContactRemoving();
             return this;
         }
+        internal ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.GoToHome();
+            SelectCheckbox(contact.Id);
+            DeleteContact();
+            SubmitContactRemoving();
+            manager.Navigator.GoToHome();
+            return this;
+        }
 
         public ContactHelper SelectCheckbox(int index)
         {
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" +(index+2)+ "]/td")).Click();
             return this;
         }
+
+        public ContactHelper SelectCheckbox(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
+
 
         public ContactHelper AddContact()
         {
@@ -129,6 +154,12 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//tr[" + (index + 2) + "]/td[8]/a/img")).Click();
             return this;
         }
+        public ContactHelper InitContactModigication(String id)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])['" + id + "']")).Click();
+            return this;
+        }
+
         public bool IsContactCreated()
         {
             manager.Navigator.GoToHome();

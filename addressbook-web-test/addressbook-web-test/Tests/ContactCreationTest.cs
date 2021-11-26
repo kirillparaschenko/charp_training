@@ -8,11 +8,12 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreateTests : AuthTestBase
+    public class ContactCreateTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
@@ -39,11 +40,11 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreateTest(ContactData contact)
         {
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contact.Create(contact);
             
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();
