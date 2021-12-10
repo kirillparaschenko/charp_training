@@ -23,7 +23,12 @@ namespace WebAddressbookTests
 
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAll().Except(oldList).First();
+            ContactData contact = ContactData.GetAll().Except(oldList).FirstOrDefault();
+            if (contact == null)
+            {
+                app.Contact.Create(new ContactData("New", "New"));
+                contact = ContactData.GetAll().Except(oldList).First();
+            }
 
             app.Contact.AddContactToGroup(contact, group);
 
